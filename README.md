@@ -3,7 +3,7 @@ A cordova plugin defines for react native on ios and android
 
 ## Installation
 ```sh
-npm install react-native-cordova --save
+npm install @remobile/react-native-cordova --save
 ```
 ### Installation (iOS)
 * Drag RCTCordova.xcodeproj to your project on Xcode.
