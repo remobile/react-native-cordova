@@ -12,6 +12,8 @@
 
 @interface CDVCommandDelegateImpl : NSObject
 
+#define IsAtLeastiOSVersion(X) ([[[UIDevice currentDevice] systemVersion] compare:X options:NSNumericSearch] != NSOrderedAscending)
+
 - (id)initWithCallback:(RCTResponseSenderBlock)successFunc error:(RCTResponseSenderBlock)errorFunc;
 - (void)sendPluginResult:(CDVPluginResult*)result;
 - (void)runInBackground:(void (^)())block;
