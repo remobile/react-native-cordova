@@ -39,9 +39,9 @@
 
 + (UIViewController *)getTopPresentedViewController {
     UIViewController *presentingViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    while(presentingViewController.presentedViewController != nil) {
-        presentingViewController = presentingViewController.presentedViewController;
-    }
+//    while(presentingViewController.presentedViewController != nil) {
+//        presentingViewController = presentingViewController.presentedViewController;
+//    }
     return presentingViewController;
 }
 
