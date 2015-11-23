@@ -19,9 +19,13 @@
 package com.remobile.cordova;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -33,6 +37,10 @@ public abstract class CordovaPlugin extends ReactContextBaseJavaModule {
         super(reactContext);
         cordova = new CordovaSimulation();
     }
+    public void sendJSEvent(String eventName, @Nullable WritableMap params) {
+        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+    }
+
     public class CordovaSimulation {
         private ExecutorService threadPool;
         private Activity activity;
