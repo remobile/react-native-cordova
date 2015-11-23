@@ -8,26 +8,9 @@
 
 #import "CDVCommandDelegateImpl.h"
 
-@interface CDVCommandDelegateImpl() {
-    RCTResponseSenderBlock success;
-    RCTResponseSenderBlock error;
-}
-@end
-
 @implementation CDVCommandDelegateImpl
-
-
-- (id)initWithCallback:(RCTResponseSenderBlock)successFunc error:(RCTResponseSenderBlock)errorFunc {
-    self = [super init];
-    if (self) {
-        success = successFunc;
-    		error = errorFunc;
-    }
-    return self;
-}
-
-- (void)sendPluginResult:(CDVPluginResult*)result {
-    RCTResponseSenderBlock callback = result.status==CDVCommandStatus_OK ? success : error;
+- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(CDVInvokedUrlCommand*)callbackId {
+    RCTResponseSenderBlock callback = result.status==CDVCommandStatus_OK ? callbackId.success : callbackId.error;
     if (callback != nil) {
         callback(@[result.message]);
     }
@@ -37,12 +20,5 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
 }
 
-+ (UIViewController *)getTopPresentedViewController {
-    UIViewController *presentingViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-//    while(presentingViewController.presentedViewController != nil) {
-//        presentingViewController = presentingViewController.presentedViewController;
-//    }
-    return presentingViewController;
-}
 
 @end

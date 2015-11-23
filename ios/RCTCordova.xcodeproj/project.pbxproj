@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		32285FA11BFC063B00AD8363 /* CDVCommandDelegateImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 32285F9E1BFC063B00AD8363 /* CDVCommandDelegateImpl.m */; };
 		32285FA21BFC063B00AD8363 /* CDVPluginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 32285FA01BFC063B00AD8363 /* CDVPluginResult.m */; };
+		3271E38E1C02D4A600A1C2B4 /* CDVPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3271E38D1C02D4A600A1C2B4 /* CDVPlugin.m */; };
+		3271E3921C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3271E3911C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,10 @@
 		32285F9E1BFC063B00AD8363 /* CDVCommandDelegateImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVCommandDelegateImpl.m; sourceTree = "<group>"; };
 		32285F9F1BFC063B00AD8363 /* CDVPluginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVPluginResult.h; sourceTree = "<group>"; };
 		32285FA01BFC063B00AD8363 /* CDVPluginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVPluginResult.m; sourceTree = "<group>"; };
+		3271E38C1C02D34800A1C2B4 /* CDVPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVPlugin.h; sourceTree = "<group>"; };
+		3271E38D1C02D4A600A1C2B4 /* CDVPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVPlugin.m; sourceTree = "<group>"; };
+		3271E3901C02DA2300A1C2B4 /* CDVInvokedUrlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVInvokedUrlCommand.h; sourceTree = "<group>"; };
+		3271E3911C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVInvokedUrlCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,10 @@
 		32285F851BFC05EC00AD8363 /* RCTCordova */ = {
 			isa = PBXGroup;
 			children = (
+				3271E38C1C02D34800A1C2B4 /* CDVPlugin.h */,
+				3271E38D1C02D4A600A1C2B4 /* CDVPlugin.m */,
+				3271E3901C02DA2300A1C2B4 /* CDVInvokedUrlCommand.h */,
+				3271E3911C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m */,
 				32285F9D1BFC063B00AD8363 /* CDVCommandDelegateImpl.h */,
 				32285F9E1BFC063B00AD8363 /* CDVCommandDelegateImpl.m */,
 				32285F9F1BFC063B00AD8363 /* CDVPluginResult.h */,
@@ -125,7 +135,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3271E3921C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m in Sources */,
 				32285FA11BFC063B00AD8363 /* CDVCommandDelegateImpl.m in Sources */,
+				3271E38E1C02D4A600A1C2B4 /* CDVPlugin.m in Sources */,
 				32285FA21BFC063B00AD8363 /* CDVPluginResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

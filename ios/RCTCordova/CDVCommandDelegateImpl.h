@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RCTBridge.h"
+#import "RCTEventDispatcher.h"
 #import "RCTBridgeModule.h"
 #import "CDVPluginResult.h"
+#import "CDVInvokedUrlCommand.h"
 
 @interface CDVCommandDelegateImpl : NSObject
 
 #define IsAtLeastiOSVersion(X) ([[[UIDevice currentDevice] systemVersion] compare:X options:NSNumericSearch] != NSOrderedAscending)
 
-- (id)initWithCallback:(RCTResponseSenderBlock)successFunc error:(RCTResponseSenderBlock)errorFunc;
-- (void)sendPluginResult:(CDVPluginResult*)result;
+- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(CDVInvokedUrlCommand*)callbackId;
 - (void)runInBackground:(void (^)())block;
-+ (UIViewController *)getTopPresentedViewController;
 
 @end
