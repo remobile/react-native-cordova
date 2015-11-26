@@ -1,6 +1,6 @@
 {
     "name": "@remobile/react-native-cordova",
-        "version": "1.0.2",
+        "version": "1.0.3",
         "description": "A cordova plugin defines for react native on ios and android",
         "author": {
             "name": "YunJiang.Fang",
