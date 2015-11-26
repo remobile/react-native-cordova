@@ -36,6 +36,9 @@ typedef enum {
 
 @property (nonatomic, assign, readonly) int status;
 @property (nonatomic, strong, readonly) id message;
+// This property can be used to scope the lifetime of another object. For example,
+// Use it to store the associated NSData when `message` is created using initWithBytesNoCopy.
+@property (nonatomic, strong) id associatedObject;
 
 - (CDVPluginResult*)init;
 + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal;
@@ -45,6 +48,7 @@ typedef enum {
 + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAsDouble:(double)theMessage;
 + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAsBool:(BOOL)theMessage;
 + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAsDictionary:(NSDictionary*)theMessage;
++ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAsArrayBuffer:(NSData*)theMessage;
 + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageToErrorObject:(int)errorCode;
 
 @end

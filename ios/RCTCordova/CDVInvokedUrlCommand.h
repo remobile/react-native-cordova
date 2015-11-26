@@ -31,6 +31,7 @@
 
 
 - (id)initWithArguments:(NSArray*)arguments success:(RCTResponseSenderBlock)successFunc error:(RCTResponseSenderBlock)errorFunc;
+- (id)initWithArguments: (NSArray*)arguments command:(CDVInvokedUrlCommand *)command;
 
 // Returns the argument at the given index.
 // If index >= the number of arguments, returns nil.

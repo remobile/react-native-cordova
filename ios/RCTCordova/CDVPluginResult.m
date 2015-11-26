@@ -18,6 +18,7 @@
  */
 
 #import "CDVPluginResult.h"
+#import "NSData+Base64.h"
 
 @interface CDVPluginResult ()
 
@@ -26,9 +27,17 @@
 @end
 
 @implementation CDVPluginResult
-@synthesize status, message;
+@synthesize status, message, associatedObject;
 
 static NSArray* org_apache_cordova_CommandStatusMsgs;
+
+id messageFromArrayBuffer(NSData* data)
+{
+    return @{
+             @"CDVType" : @"ArrayBuffer",
+             @"data" :[data cdv_base64EncodedString]
+             };
+}
 
 + (void)initialize
 {
@@ -93,6 +102,11 @@ static NSArray* org_apache_cordova_CommandStatusMsgs;
 + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAsDictionary:(NSDictionary*)theMessage
 {
     return [[self alloc] initWithStatus:statusOrdinal message:theMessage];
+}
+
++ (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageAsArrayBuffer:(NSData*)theMessage
+{
+    return [[self alloc] initWithStatus:statusOrdinal message:messageFromArrayBuffer(theMessage)];
 }
 
 + (CDVPluginResult*)resultWithStatus:(CDVCommandStatus)statusOrdinal messageToErrorObject:(int)errorCode

@@ -11,6 +11,7 @@
 		32285FA21BFC063B00AD8363 /* CDVPluginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 32285FA01BFC063B00AD8363 /* CDVPluginResult.m */; };
 		3271E38E1C02D4A600A1C2B4 /* CDVPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3271E38D1C02D4A600A1C2B4 /* CDVPlugin.m */; };
 		3271E3921C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3271E3911C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m */; };
+		3271E3DC1C03122E00A1C2B4 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3271E3DB1C03122E00A1C2B4 /* NSData+Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,8 @@
 		3271E38D1C02D4A600A1C2B4 /* CDVPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVPlugin.m; sourceTree = "<group>"; };
 		3271E3901C02DA2300A1C2B4 /* CDVInvokedUrlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVInvokedUrlCommand.h; sourceTree = "<group>"; };
 		3271E3911C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVInvokedUrlCommand.m; sourceTree = "<group>"; };
+		3271E3DA1C03122E00A1C2B4 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		3271E3DB1C03122E00A1C2B4 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,12 +72,14 @@
 			children = (
 				3271E38C1C02D34800A1C2B4 /* CDVPlugin.h */,
 				3271E38D1C02D4A600A1C2B4 /* CDVPlugin.m */,
+				32285F9F1BFC063B00AD8363 /* CDVPluginResult.h */,
+				32285FA01BFC063B00AD8363 /* CDVPluginResult.m */,
+				3271E3DA1C03122E00A1C2B4 /* NSData+Base64.h */,
+				3271E3DB1C03122E00A1C2B4 /* NSData+Base64.m */,
 				3271E3901C02DA2300A1C2B4 /* CDVInvokedUrlCommand.h */,
 				3271E3911C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m */,
 				32285F9D1BFC063B00AD8363 /* CDVCommandDelegateImpl.h */,
 				32285F9E1BFC063B00AD8363 /* CDVCommandDelegateImpl.m */,
-				32285F9F1BFC063B00AD8363 /* CDVPluginResult.h */,
-				32285FA01BFC063B00AD8363 /* CDVPluginResult.m */,
 			);
 			path = RCTCordova;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 			files = (
 				3271E3921C02DA2300A1C2B4 /* CDVInvokedUrlCommand.m in Sources */,
 				32285FA11BFC063B00AD8363 /* CDVCommandDelegateImpl.m in Sources */,
+				3271E3DC1C03122E00A1C2B4 /* NSData+Base64.m in Sources */,
 				3271E38E1C02D4A600A1C2B4 /* CDVPlugin.m in Sources */,
 				32285FA21BFC063B00AD8363 /* CDVPluginResult.m in Sources */,
 			);

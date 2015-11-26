@@ -36,6 +36,17 @@
     return self;
 }
 
+- (id)initWithArguments: (NSArray*)arguments command:(CDVInvokedUrlCommand *)command {
+    self = [super init];
+    if (self != nil) {
+        _arguments = arguments;
+        _success = command.success;
+        _error = command.error;
+        _callbackId = self;
+    }
+    return self;
+}
+
 - (id)argumentAtIndex:(NSUInteger)index
 {
     return [self argumentAtIndex:index withDefault:nil];
