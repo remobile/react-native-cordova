@@ -57,13 +57,13 @@ public class PluginResult {
     public PluginResult(Status status, int i) {
         this.status = status;
         this.messageType = MESSAGE_TYPE_NUMBER;
-        this.stringMessage = ""+i;
+        this.stringMessage = "" + i;
     }
 
     public PluginResult(Status status, float f) {
         this.status = status;
         this.messageType = MESSAGE_TYPE_NUMBER;
-        this.stringMessage = ""+f;
+        this.stringMessage = "" + f;
     }
 
     public PluginResult(Status status, boolean b) {
@@ -72,24 +72,38 @@ public class PluginResult {
         this.stringMessage = Boolean.toString(b);
     }
 
+    public PluginResult(Status status, byte[] data) {
+        this(status, data, false);
+    }
+
+    public PluginResult(Status status, byte[] data, boolean binaryString) {
+        this.status = status;
+        this.messageType = binaryString ? MESSAGE_TYPE_BINARYSTRING : MESSAGE_TYPE_ARRAYBUFFER;
+        this.stringMessage = Base64.encodeToString(data, Base64.NO_WRAP);
+    }
+
     public static final int MESSAGE_TYPE_STRING = 0;
     public static final int MESSAGE_TYPE_JSON_ARRAY = 1;
     public static final int MESSAGE_TYPE_JSON_OBJECT = 2;
     public static final int MESSAGE_TYPE_NUMBER = 3;
     public static final int MESSAGE_TYPE_BOOLEAN = 4;
     public static final int MESSAGE_TYPE_NULL = 5;
+    public static final int MESSAGE_TYPE_ARRAYBUFFER = 6;
+    // Use BINARYSTRING when your string may contain null characters.
+    // This is required to work around a bug in the platform :(.
+    public static final int MESSAGE_TYPE_BINARYSTRING = 7;
 
-    public static String[] StatusMessages = new String[] {
-        "No result",
-        "OK",
-        "Class not found",
-        "Illegal access",
-        "Instantiation error",
-        "Malformed url",
-        "IO error",
-        "Invalid action",
-        "JSON error",
-        "Error"
+    public static String[] StatusMessages = new String[]{
+            "No result",
+            "OK",
+            "Class not found",
+            "Illegal access",
+            "Instantiation error",
+            "Malformed url",
+            "IO error",
+            "Invalid action",
+            "JSON error",
+            "Error"
     };
 
     public enum Status {

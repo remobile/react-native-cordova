@@ -73,7 +73,6 @@ public class CordovaResourceApi {
     public static final int URI_TYPE_HTTPS = 6;
     public static final int URI_TYPE_UNKNOWN = -1;
 
-
     private static final String[] LOCAL_FILE_PROJECTION = { "_data" };
     
     public static Thread jsThread;
