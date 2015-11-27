@@ -20,14 +20,14 @@
 #import "RCTBridgeModule.h"
 
 @interface CDVInvokedUrlCommand : NSObject {
-    __weak CDVInvokedUrlCommand* _callbackId;
+    CDVInvokedUrlCommand* _callbackId;
     NSArray* _arguments;
 }
 
-@property (nonatomic, readonly) NSArray* arguments;
-@property (nonatomic, weak) CDVInvokedUrlCommand* callbackId;
-@property (nonatomic, readonly) RCTResponseSenderBlock success;
-@property (nonatomic, readonly) RCTResponseSenderBlock error;
+@property (nonatomic, strong) NSArray* arguments;
+@property (nonatomic, strong) CDVInvokedUrlCommand* callbackId;
+@property (nonatomic, strong) RCTResponseSenderBlock success;
+@property (nonatomic, strong) RCTResponseSenderBlock error;
 
 
 - (id)initWithArguments:(NSArray*)arguments success:(RCTResponseSenderBlock)successFunc error:(RCTResponseSenderBlock)errorFunc;
