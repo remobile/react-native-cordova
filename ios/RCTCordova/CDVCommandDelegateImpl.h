@@ -1,6 +1,6 @@
 //
 //  CDVCommandDelegateImpl.h
-//  CRTFileTransfer
+//  CDVCommandDelegateImpl
 //
 //  Created by fangyunjiang on 15/11/17.
 //  Copyright (c) 2015年 remobile. All rights reserved.
