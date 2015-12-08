@@ -26,9 +26,6 @@ var {
     NativeModules,
 } = React;
 
-var CRTDialogs= NativeModules.Dialogs;
-
-
 module.exports = function(successCallback, errorCallback, moduleName, methodName, args) {
     successCallback = successCallback||function(){};
     errorCallback = errorCallback||function(){};

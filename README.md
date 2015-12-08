@@ -97,3 +97,4 @@ public class CustomClass extends CordovaPlugin {
 * [react-native-file-transfer](https://github.com/remobile/react-native-file-transfer)
 * [react-native-image-picker](https://github.com/remobile/react-native-image-picker)
 * [react-native-sqlite](https://github.com/remobile/react-native-sqlite)
+* [react-native-file](https://github.com/remobile/react-native-file)
