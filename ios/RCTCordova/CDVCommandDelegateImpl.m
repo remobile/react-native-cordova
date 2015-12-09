@@ -12,7 +12,7 @@
 - (void)sendPluginResult:(CDVPluginResult*)result callbackId:(CDVInvokedUrlCommand*)callbackId {
     RCTResponseSenderBlock callback = result.status==CDVCommandStatus_OK ? callbackId.success : callbackId.error;
     if (callback != nil) {
-        callback(@[result.message]);
+        callback(@[result.message?:@""]);
     }
 }
 

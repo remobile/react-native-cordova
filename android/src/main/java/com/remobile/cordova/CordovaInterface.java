@@ -19,26 +19,38 @@
 package com.remobile.cordova;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
-
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
+import android.content.Intent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class CordovaPlugin extends ReactContextBaseJavaModule {
-    public CordovaInterface cordova;
 
-    public CordovaPlugin(ReactApplicationContext reactContext) {
-        super(reactContext);
-        cordova = new CordovaInterface();
+public class CordovaInterface {
+    private ExecutorService threadPool;
+    private Activity activity;
+
+    public static final int CAMERA_RESULT = 0;
+    public static final int IMAGE_PICKER_RESULT = 10000;
+    public static final int CONTACT_PICKER_RESULT = 20000;
+
+    public CordovaInterface() {
+        threadPool = Executors.newCachedThreadPool();
     }
-    public void sendJSEvent(String eventName, @Nullable WritableMap params) {
-        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+
+    public ExecutorService getThreadPool() {
+        return threadPool;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
+        activity.startActivityForResult(intent, requestCode);
     }
 }
 
