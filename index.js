@@ -24,9 +24,11 @@
 var exec = require('./libs/exec.js');
 var utils = require('./libs/utils.js');
 var argscheck = require('./libs/argscheck.js');
+var ProgressEvent = require('./libs/ProgressEvent.js');
 
 module.exports = {
     exec: exec,
     utils: utils,
     argscheck: argscheck,
+    ProgressEvent: ProgressEvent,
 }
