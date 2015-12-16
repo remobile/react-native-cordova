@@ -18,7 +18,7 @@ npm install @remobile/react-native-cordova --save
 ```gradle
 ...
 include ':react-native-cordova'
-project(':react-native-cordova').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cordova/android/RCTCordova')
+project(':react-native-cordova').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-cordova/android/RCTCordova')
 ```
 
 * In you project `build.gradle`
@@ -98,3 +98,4 @@ public class CustomClass extends CordovaPlugin {
 * [react-native-image-picker](https://github.com/remobile/react-native-image-picker)
 * [react-native-sqlite](https://github.com/remobile/react-native-sqlite)
 * [react-native-file](https://github.com/remobile/react-native-file)
+* [react-native-zip](https://github.com/remobile/react-native-zip)

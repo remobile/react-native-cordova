@@ -11,7 +11,7 @@ package com.remobile.cordova;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReadableMapKeySeyIterator;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
@@ -25,7 +25,7 @@ import java.util.Iterator;
 public abstract class JsonConvert {
     public static JSONObject reactToJSON(ReadableMap readableMap) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        ReadableMapKeySeyIterator iterator = readableMap.keySetIterator();
+        ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
         while(iterator.hasNextKey()){
             String key = iterator.nextKey();
             ReadableType valueType = readableMap.getType(key);
