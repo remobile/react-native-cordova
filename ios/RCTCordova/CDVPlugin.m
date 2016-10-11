@@ -17,28 +17,95 @@
  under the License.
  */
 #import "CDVPlugin.h"
+#import "RCTAssert.h"
+#import "RCTUtils.h"
+#import "RCTLog.h"
+
+#define CDV_PLUGIN_IMPL \
+@synthesize commandDelegate = _commandDelegate; \
+\
++ (NSString *)moduleName { \
+    return @""; \
+} \
+\
+- (id)init { \
+    self = [super init]; \
+    if (self) { \
+        _commandDelegate = [[CDVCommandDelegateImpl alloc]init]; \
+    } \
+    return self; \
+} \
+\
+-(UIViewController*)viewController \
+{ \
+    UIViewController *presentingViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController]; \
+    while(presentingViewController.presentedViewController != nil) { \
+        presentingViewController = presentingViewController.presentedViewController; \
+    } \
+    return presentingViewController; \
+}
 
 @implementation CDVPlugin
-@synthesize commandDelegate = _commandDelegate;
+CDV_PLUGIN_IMPL
+@end
 
-+ (NSString *)moduleName {
-    return nil;
+@implementation CDVPluginEventEmitter
+{
+    NSInteger _listenerCount;
 }
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        _commandDelegate = [[CDVCommandDelegateImpl alloc]init];
+CDV_PLUGIN_IMPL
+
+- (void)sendEventWithName:(NSString *)eventName body:(id)body
+{
+    RCTAssert(_bridge != nil, @"bridge is not set. This is probably because you've "
+              "explicitly synthesized the bridge in %@, even though it's inherited "
+              "from CDVPluginEventEmitter.", [self class]);
+    
+    if (_listenerCount > 0) {
+        [_bridge enqueueJSCall:@"RCTDeviceEventEmitter"
+                        method:@"emit"
+                          args:body ? @[eventName, body] : @[eventName]
+                    completion:NULL];
+    } else {
+        RCTLogWarn(@"Sending `%@` with no listeners registered.", eventName);
     }
-    return self;
 }
 
-+ (UIViewController *)presentViewController {
-    UIViewController *presentingViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    //    while(presentingViewController.presentedViewController != nil) {
-    //        presentingViewController = presentingViewController.presentedViewController;
-    //    }
-    return presentingViewController;
+- (void)startObserving
+{
+    // Does nothing
+}
+
+- (void)stopObserving
+{
+    // Does nothing
+}
+
+- (void)dealloc
+{
+    if (_listenerCount > 0) {
+        [self stopObserving];
+    }
+}
+
+RCT_EXPORT_METHOD(addListener:(NSString *)eventName)
+{
+    if (_listenerCount == 0) {
+        [self startObserving];
+    }
+    _listenerCount++;
+}
+
+RCT_EXPORT_METHOD(removeListeners:(NSInteger)count)
+{
+    if (RCT_DEBUG && count > _listenerCount) {
+        RCTLogError(@"Attempted to remove more %@ listeners than added", [self class]);
+    }
+    if (count == _listenerCount) {
+        [self stopObserving];
+    }
+    _listenerCount -= count;
 }
 
 @end

@@ -37,7 +37,11 @@ public abstract class JsonConvert {
                     jsonObject.put(key, readableMap.getBoolean(key));
                     break;
                 case Number:
-                    jsonObject.put(key, readableMap.getInt(key));
+                    try {
+                        jsonObject.put(key, readableMap.getInt(key));
+                    } catch(Exception e) {
+                        jsonObject.put(key, readableMap.getDouble(key));
+                    }
                     break;
                 case String:
                     jsonObject.put(key, readableMap.getString(key));
@@ -66,7 +70,11 @@ public abstract class JsonConvert {
                     jsonArray.put(readableArray.getBoolean(i));
                     break;
                 case Number:
-                    jsonArray.put(readableArray.getInt(i));
+                    try {
+                        jsonArray.put(readableArray.getInt(i));
+                    } catch(Exception e) {
+                        jsonArray.put(readableArray.getDouble(i));
+                    }
                     break;
                 case String:
                     jsonArray.put(readableArray.getString(i));

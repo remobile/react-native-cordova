@@ -17,7 +17,7 @@
 
 #define IsAtLeastiOSVersion(X) ([[[UIDevice currentDevice] systemVersion] compare:X options:NSNumericSearch] != NSOrderedAscending)
 
-- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(CDVInvokedUrlCommand*)callbackId;
+- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(id)callbackId;
 - (void)runInBackground:(void (^)())block;
-
+- (void)runInUIThread:(void (^)())block;
 @end

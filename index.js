@@ -21,6 +21,7 @@
 
 'use strict';
 
+var ReactNative = require('react-native');
 var exec = require('./libs/exec.js');
 var utils = require('./libs/utils.js');
 var argscheck = require('./libs/argscheck.js');
@@ -31,4 +32,5 @@ module.exports = {
     utils: utils,
     argscheck: argscheck,
     ProgressEvent: ProgressEvent,
+    isandroid: ReactNative.Platform === 'android',
 }

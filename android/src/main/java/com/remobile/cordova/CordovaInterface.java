@@ -18,8 +18,14 @@
 */
 package com.remobile.cordova;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.util.Pair;
+
+import org.json.JSONException;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,14 +33,15 @@ import java.util.concurrent.Executors;
 
 public class CordovaInterface {
     private ExecutorService threadPool;
-    private Activity activity;
+    private CordovaPlugin plugin;
+    protected CordovaPlugin activityResultCallback;
+    protected CallbackMap permissionResultCallbacks;
+    protected int activityResultRequestCode = -1;
 
-    public static final int CAMERA_RESULT = 0;
-    public static final int IMAGE_PICKER_RESULT = 10000;
-    public static final int CONTACT_PICKER_RESULT = 20000;
-
-    public CordovaInterface() {
+    public CordovaInterface(CordovaPlugin plugin) {
+        this.plugin = plugin;
         threadPool = Executors.newCachedThreadPool();
+        this.permissionResultCallbacks = new CallbackMap();
     }
 
     public ExecutorService getThreadPool() {
@@ -42,16 +49,65 @@ public class CordovaInterface {
     }
 
     public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
+        return plugin.getActivity();
     }
 
     public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
-        activity.startActivityForResult(intent, requestCode);
+        setActivityResultCallback(command);
+        try {
+            getActivity().startActivityForResult(intent, requestCode + plugin.requestCodeStart);
+        } catch (RuntimeException e) { // E.g.: ActivityNotFoundException
+            activityResultCallback = null;
+            throw e;
+        }
     }
+
+    public void setActivityResultCallback(CordovaPlugin plugin) {
+        // Cancel any previously pending activity.
+        if (activityResultCallback != null) {
+            activityResultCallback.onActivityResult(activityResultRequestCode, Activity.RESULT_CANCELED, null);
+        }
+        activityResultCallback = plugin;
+    }
+
+    public void setActivityResultRequestCode(int requestCode) {
+        activityResultRequestCode = requestCode;
+    }
+
+
+    public void onRequestPermissionResult(int requestCode, String[] permissions,
+                                          int[] grantResults) throws JSONException {
+        Pair<CordovaPlugin, Integer> callback = permissionResultCallbacks.getAndRemoveCallback(requestCode);
+        if(callback != null) {
+            callback.first.onRequestPermissionResult(callback.second, permissions, grantResults);
+        }
+    }
+
+    public void requestPermission(CordovaPlugin plugin, int requestCode, String permission) {
+        String[] permissions = new String [1];
+        permissions[0] = permission;
+        requestPermissions(plugin, requestCode, permissions);
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void requestPermissions(CordovaPlugin plugin, int requestCode, String [] permissions) {
+        int mappedRequestCode = permissionResultCallbacks.registerCallback(plugin, requestCode);
+        getActivity().requestPermissions(permissions, mappedRequestCode);
+    }
+
+    public boolean hasPermission(String permission)
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            int result = getActivity().checkSelfPermission(permission);
+            return PackageManager.PERMISSION_GRANTED == result;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
 }
 
 

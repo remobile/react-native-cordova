@@ -26,9 +26,9 @@ import org.json.JSONObject;
 import android.util.Base64;
 
 public class PluginResult {
-    public final Status status;
+    public final int status;
     public final int messageType;
-    public String stringMessage;
+    public String strMessage;
     public JSONArray jsonArrayMessage;
     public JSONObject jsonObjectMessage;
 
@@ -37,39 +37,39 @@ public class PluginResult {
     }
 
     public PluginResult(Status status, String message) {
-        this.status = status;
+        this.status = status.ordinal();
         this.messageType = message == null ? MESSAGE_TYPE_NULL : MESSAGE_TYPE_STRING;
-        this.stringMessage = message;
+        this.strMessage = message;
     }
 
     public PluginResult(Status status, JSONArray message) {
-        this.status = status;
+        this.status = status.ordinal();
         this.messageType = MESSAGE_TYPE_JSON_ARRAY;
         jsonArrayMessage = message;
     }
 
     public PluginResult(Status status, JSONObject message) {
-        this.status = status;
+        this.status = status.ordinal();
         this.messageType = MESSAGE_TYPE_JSON_OBJECT;
         jsonObjectMessage = message;
     }
 
     public PluginResult(Status status, int i) {
-        this.status = status;
+        this.status = status.ordinal();
         this.messageType = MESSAGE_TYPE_NUMBER;
-        this.stringMessage = "" + i;
+        this.strMessage = "" + i;
     }
 
     public PluginResult(Status status, float f) {
-        this.status = status;
+        this.status = status.ordinal();
         this.messageType = MESSAGE_TYPE_NUMBER;
-        this.stringMessage = "" + f;
+        this.strMessage = "" + f;
     }
 
     public PluginResult(Status status, boolean b) {
-        this.status = status;
+        this.status = status.ordinal();
         this.messageType = MESSAGE_TYPE_BOOLEAN;
-        this.stringMessage = Boolean.toString(b);
+        this.strMessage = Boolean.toString(b);
     }
 
     public PluginResult(Status status, byte[] data) {
@@ -77,9 +77,13 @@ public class PluginResult {
     }
 
     public PluginResult(Status status, byte[] data, boolean binaryString) {
-        this.status = status;
+        this.status = status.ordinal();
         this.messageType = binaryString ? MESSAGE_TYPE_BINARYSTRING : MESSAGE_TYPE_ARRAYBUFFER;
-        this.stringMessage = Base64.encodeToString(data, Base64.NO_WRAP);
+        this.strMessage = Base64.encodeToString(data, Base64.NO_WRAP);
+    }
+
+    public int getStatus() {
+        return status;
     }
 
     public static final int MESSAGE_TYPE_STRING = 0;

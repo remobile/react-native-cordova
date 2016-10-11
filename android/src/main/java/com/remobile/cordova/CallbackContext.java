@@ -38,7 +38,7 @@ public class CallbackContext {
 
     public void sendPluginResult(PluginResult pluginResult) {
         int messageType = pluginResult.messageType;
-        Callback callback = pluginResult.status.equals(PluginResult.Status.OK) ? success : error;
+        Callback callback = pluginResult.status == PluginResult.Status.OK.ordinal() ? success : error;
         if (callback == null) {
             return;
         }
@@ -51,7 +51,7 @@ public class CallbackContext {
                     callback.invoke(JsonConvert.jsonToReact(pluginResult.jsonObjectMessage));
                     break;
                 default:
-                    callback.invoke(pluginResult.stringMessage);
+                    callback.invoke(pluginResult.strMessage);
                     break;
             }
         } catch (JSONException ex) {
@@ -62,7 +62,7 @@ public class CallbackContext {
     /**
      * Helper for success callbacks that just returns the Status.OK by default
      *
-     * @param message The message to add to the success result.
+     * @param message           The message to add to the success result.
      */
     public void success(JSONObject message) {
         sendPluginResult(new PluginResult(PluginResult.Status.OK, message));
@@ -71,7 +71,7 @@ public class CallbackContext {
     /**
      * Helper for success callbacks that just returns the Status.OK by default
      *
-     * @param message The message to add to the success result.
+     * @param message           The message to add to the success result.
      */
     public void success(String message) {
         sendPluginResult(new PluginResult(PluginResult.Status.OK, message));
@@ -80,7 +80,7 @@ public class CallbackContext {
     /**
      * Helper for success callbacks that just returns the Status.OK by default
      *
-     * @param message The message to add to the success result.
+     * @param message           The message to add to the success result.
      */
     public void success(JSONArray message) {
         sendPluginResult(new PluginResult(PluginResult.Status.OK, message));
@@ -89,7 +89,7 @@ public class CallbackContext {
     /**
      * Helper for success callbacks that just returns the Status.OK by default
      *
-     * @param message The message to add to the success result.
+     * @param message           The message to add to the success result.
      */
     public void success(int message) {
         sendPluginResult(new PluginResult(PluginResult.Status.OK, message));
@@ -105,7 +105,7 @@ public class CallbackContext {
     /**
      * Helper for error callbacks that just returns the Status.ERROR by default
      *
-     * @param message The message to add to the error result.
+     * @param message           The message to add to the error result.
      */
     public void error(JSONObject message) {
         sendPluginResult(new PluginResult(PluginResult.Status.ERROR, message));
@@ -114,7 +114,7 @@ public class CallbackContext {
     /**
      * Helper for error callbacks that just returns the Status.ERROR by default
      *
-     * @param message The message to add to the error result.
+     * @param message           The message to add to the error result.
      */
     public void error(String message) {
         sendPluginResult(new PluginResult(PluginResult.Status.ERROR, message));
@@ -123,7 +123,7 @@ public class CallbackContext {
     /**
      * Helper for error callbacks that just returns the Status.ERROR by default
      *
-     * @param message The message to add to the error result.
+     * @param message           The message to add to the error result.
      */
     public void error(int message) {
         sendPluginResult(new PluginResult(PluginResult.Status.ERROR, message));

@@ -21,10 +21,11 @@
 
 'use strict';
 
-var React = require('react-native');
+
+var ReactNative = require('react-native');
 var {
     NativeModules,
-} = React;
+} = ReactNative;
 
 module.exports = function(successCallback, errorCallback, moduleName, methodName, args) {
     successCallback = successCallback||function(){};

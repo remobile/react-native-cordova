@@ -7,10 +7,12 @@
 //
 
 #import "CDVCommandDelegateImpl.h"
+#import "RCTUtils.h"
 
 @implementation CDVCommandDelegateImpl
-- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(CDVInvokedUrlCommand*)callbackId {
-    RCTResponseSenderBlock callback = result.status==CDVCommandStatus_OK ? callbackId.success : callbackId.error;
+- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(id)callbackId {
+    CDVInvokedUrlCommand* command= (CDVInvokedUrlCommand*)callbackId;
+    RCTResponseSenderBlock callback = [result.status intValue]==CDVCommandStatus_OK ? command.success : command.error;
     if (callback != nil) {
         callback(@[result.message?:@""]);
     }
@@ -20,5 +22,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
 }
 
+- (void)runInUIThread:(void (^)())block {
+    RCTExecuteOnMainQueue(block);
+}
 
 @end

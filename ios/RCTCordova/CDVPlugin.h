@@ -27,24 +27,33 @@ CDVInvokedUrlCommand *command = [[CDVInvokedUrlCommand alloc]initWithArguments:a
 [self name:command]; \
 }
 
-#define RCT_EXPORT_CORDOVA_METHOD1(name) \
-RCT_EXPORT_METHOD(name:(NSArray *)args success:(RCTResponseSenderBlock)success) { \
-CDVInvokedUrlCommand *command = [[CDVInvokedUrlCommand alloc]initWithArguments:args success:success error:nil]; \
-[self name:command]; \
-}
-
-#define RCT_EXPORT_CORDOVA_METHOD2(name, _name) \
-RCT_EXPORT_METHOD(name:(NSArray *)args) { \
-CDVInvokedUrlCommand *command = [[CDVInvokedUrlCommand alloc]initWithArguments:args success:nil error:nil]; \
-[self _name:command]; \
-}
+#define CDV_PLUGIN_DEFINE { \
+    CDVCommandDelegateImpl* _commandDelegate; \
+} \
+@property (nonatomic, readonly) CDVCommandDelegateImpl* commandDelegate; \
+@property (nonatomic, readonly, strong) UIViewController *viewController;
 
 
-
-@interface CDVPlugin : NSObject <RCTBridgeModule> {
-    CDVCommandDelegateImpl* _commandDelegate;
-}
-@property (nonatomic, readonly) CDVCommandDelegateImpl* commandDelegate;
-
-+ (UIViewController *)presentViewController;
+@interface CDVPlugin : NSObject <RCTBridgeModule>
+CDV_PLUGIN_DEFINE
 @end
+
+@interface CDVPluginEventEmitter : NSObject <RCTBridgeModule>
+CDV_PLUGIN_DEFINE
+
+@property (nonatomic, weak) RCTBridge *bridge;
+/**
+ * Send an event that does not relate to a specific view, e.g. a navigation
+ * or data update notification.
+ */
+- (void)sendEventWithName:(NSString *)name body:(id)body;
+
+/**
+ * These methods will be called when the first observer is added and when the
+ * last observer is removed (or when dealloc is called), respectively. These
+ * should be overridden in your subclass in order to start/stop sending events.
+ */
+- (void)startObserving;
+- (void)stopObserving;
+@end
+
