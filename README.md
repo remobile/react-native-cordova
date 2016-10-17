@@ -18,7 +18,7 @@ npm install @remobile/react-native-cordova --save
 ```gradle
 ...
 include ':react-native-cordova'
-project(':react-native-cordova').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-cordova/android/RCTCordova')
+project(':react-native-cordova').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-cordova/android')
 ```
 
 * In you project `build.gradle`
