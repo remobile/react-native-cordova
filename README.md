@@ -18,7 +18,7 @@ npm install @remobile/react-native-cordova --save
 ```gradle
 ...
 include ':react-native-cordova'
-project(':react-native-cordova').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-cordova/android/RCTCordova')
+project(':react-native-cordova').projectDir = new File(settingsDir, '../node_modules/@remobile/react-native-cordova/android/RCTCordova')
 ```
 
 * In you project `build.gradle`
@@ -59,9 +59,8 @@ import com.remobile.cordova.*;
 ...
 public class CustomClass extends CordovaPlugin {
 ...
-    public CustomClass(ReactApplicationContext reactContext, Activity activity) {
+    public CustomClass(ReactApplicationContext reactContext) {
             super(reactContext);
-            this.cordova.setActivity(activity);
         }
 ...
     @Override
@@ -70,12 +69,7 @@ public class CustomClass extends CordovaPlugin {
     }
     @ReactMethod
     public void test(ReadableArray args, Callback success, Callback error) {
-        String action = "test";
-        try {
-            this.execute(action, JsonConvert.reactToJSON(args), new CallbackContext(success, error));
-        } catch (Exception ex) {
-            FLog.e(LOG_TAG, "Unexpected error:" + ex.getMessage());
-        }
+        executeReactMethod("test", args, success, error);
     }
     ...
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -99,3 +93,6 @@ public class CustomClass extends CordovaPlugin {
 * [react-native-sqlite](https://github.com/remobile/react-native-sqlite)
 * [react-native-file](https://github.com/remobile/react-native-file)
 * [react-native-zip](https://github.com/remobile/react-native-zip)
+* [react-native-capture](https://github.com/remobile/react-native-capture)
+* [react-native-capture](https://github.com/remobile/react-native-capture)
+* [react-native-local-notifications](https://github.com/remobile/react-native-local-notifications)
