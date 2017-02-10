@@ -17,9 +17,9 @@
  under the License.
  */
 #import "CDVPlugin.h"
-#import "RCTAssert.h"
-#import "RCTUtils.h"
-#import "RCTLog.h"
+#import <React/RCTAssert.h>
+#import <React/RCTUtils.h>
+#import <React/RCTLog.h>
 
 #define CDV_PLUGIN_IMPL \
 @synthesize commandDelegate = _commandDelegate; \

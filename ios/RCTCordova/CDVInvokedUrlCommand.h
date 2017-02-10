@@ -17,7 +17,7 @@
  under the License.
  */
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 
 @interface CDVInvokedUrlCommand : NSObject {
     id _callbackId;
