@@ -7,7 +7,7 @@
 //
 
 #import "CDVCommandDelegateImpl.h"
-#import "RCTUtils.h"
+#import <React/RCTUtils.h>
 
 @implementation CDVCommandDelegateImpl
 - (void)sendPluginResult:(CDVPluginResult*)result callbackId:(id)callbackId {
