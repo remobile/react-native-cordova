@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RCTBridge.h"
-#import "RCTEventDispatcher.h"
-#import "RCTBridgeModule.h"
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTBridgeModule.h>
 #import "CDVPluginResult.h"
 #import "CDVInvokedUrlCommand.h"
 

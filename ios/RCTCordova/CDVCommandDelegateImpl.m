@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 remobile. All rights reserved.
 //
 
+#import <React/RCTUtils.h>
 #import "CDVCommandDelegateImpl.h"
-#import "RCTUtils.h"
 
 @implementation CDVCommandDelegateImpl
 - (void)sendPluginResult:(CDVPluginResult*)result callbackId:(id)callbackId {
