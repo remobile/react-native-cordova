@@ -34,7 +34,6 @@ import java.util.concurrent.Executors;
 public class CordovaInterface {
     private ExecutorService threadPool;
     private CordovaPlugin plugin;
-    protected CordovaPlugin activityResultCallback;
     protected CallbackMap permissionResultCallbacks;
     protected int activityResultRequestCode = -1;
 
@@ -53,21 +52,11 @@ public class CordovaInterface {
     }
 
     public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
-        setActivityResultCallback(command);
         try {
             getActivity().startActivityForResult(intent, requestCode + plugin.requestCodeStart);
         } catch (RuntimeException e) { // E.g.: ActivityNotFoundException
-            activityResultCallback = null;
             throw e;
         }
-    }
-
-    public void setActivityResultCallback(CordovaPlugin plugin) {
-        // Cancel any previously pending activity.
-        if (activityResultCallback != null) {
-            activityResultCallback.onActivityResult(activityResultRequestCode, Activity.RESULT_CANCELED, null);
-        }
-        activityResultCallback = plugin;
     }
 
     public void setActivityResultRequestCode(int requestCode) {
