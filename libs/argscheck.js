@@ -19,31 +19,32 @@
  *
 */
 
-var utils = require('./utils');
+const utils = require('./utils');
 
-var moduleExports = module.exports;
+const moduleExports = module.exports;
 
-var typeMap = {
+const typeMap = {
     'A': 'Array',
     'D': 'Date',
     'N': 'Number',
     'S': 'String',
     'F': 'Function',
-    'O': 'Object'
+    'O': 'Object',
 };
 
-function extractParamName(callee, argIndex) {
+function extractParamName (callee, argIndex) {
     return (/.*?\((.*?)\)/).exec(callee)[1].split(', ')[argIndex];
 }
 
-function checkArgs(spec, functionName, args, opt_callee) {
+function checkArgs (spec, functionName, args, opt_callee) {
     if (!moduleExports.enableChecks) {
         return;
     }
-    var errMsg = null;
-    var typeName;
-    for (var i = 0; i < spec.length; ++i) {
-        var c = spec.charAt(i),
+    let errMsg = null;
+    let typeName;
+    let i;
+    for (i = 0; i < spec.length; ++i) {
+        const c = spec.charAt(i),
             cUpper = c.toUpperCase(),
             arg = args[i];
         // Asterix means allow anything.
@@ -70,7 +71,7 @@ function checkArgs(spec, functionName, args, opt_callee) {
     }
 }
 
-function getValue(value, defaultValue) {
+function getValue (value, defaultValue) {
     return value === undefined ? defaultValue : value;
 }
 

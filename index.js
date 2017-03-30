@@ -21,11 +21,11 @@
 
 'use strict';
 
-var ReactNative = require('react-native');
-var exec = require('./libs/exec.js');
-var utils = require('./libs/utils.js');
-var argscheck = require('./libs/argscheck.js');
-var ProgressEvent = require('./libs/ProgressEvent.js');
+const ReactNative = require('react-native');
+const exec = require('./libs/exec.js');
+const utils = require('./libs/utils.js');
+const argscheck = require('./libs/argscheck.js');
+const ProgressEvent = require('./libs/ProgressEvent.js');
 
 module.exports = {
     exec: exec,
@@ -33,4 +33,4 @@ module.exports = {
     argscheck: argscheck,
     ProgressEvent: ProgressEvent,
     isandroid: ReactNative.Platform === 'android',
-}
+};

@@ -21,14 +21,13 @@
 
 'use strict';
 
-
-var ReactNative = require('react-native');
-var {
+const ReactNative = require('react-native');
+const {
     NativeModules,
 } = ReactNative;
 
-module.exports = function(successCallback, errorCallback, moduleName, methodName, args) {
-    successCallback = successCallback||function(){};
-    errorCallback = errorCallback||function(){};
+module.exports = function (successCallback, errorCallback, moduleName, methodName, args) {
+    successCallback = successCallback || function () {};
+    errorCallback = errorCallback || function () {};
     NativeModules[moduleName][methodName](args, successCallback, errorCallback);
-}
+};

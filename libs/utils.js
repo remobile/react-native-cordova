@@ -19,16 +19,16 @@
  *
 */
 
-var utils = exports;
+const utils = exports;
 
 /**
  * Defines a property getter / setter for obj[key].
  */
-utils.defineGetterSetter = function(obj, key, getFunc, opt_setFunc) {
+utils.defineGetterSetter = function (obj, key, getFunc, opt_setFunc) {
     if (Object.defineProperty) {
-        var desc = {
+        const desc = {
             get: getFunc,
-            configurable: true
+            configurable: true,
         };
         if (opt_setFunc) {
             desc.set = opt_setFunc;
@@ -47,12 +47,12 @@ utils.defineGetterSetter = function(obj, key, getFunc, opt_setFunc) {
  */
 utils.defineGetter = utils.defineGetterSetter;
 
-utils.arrayIndexOf = function(a, item) {
+utils.arrayIndexOf = function (a, item) {
     if (a.indexOf) {
         return a.indexOf(item);
     }
-    var len = a.length;
-    for (var i = 0; i < len; ++i) {
+    const len = a.length;
+    for (let i = 0; i < len; ++i) {
         if (a[i] == item) {
             return i;
         }
@@ -63,15 +63,15 @@ utils.arrayIndexOf = function(a, item) {
 /**
  * Returns whether the item was found in the array.
  */
-utils.arrayRemove = function(a, item) {
-    var index = utils.arrayIndexOf(a, item);
+utils.arrayRemove = function (a, item) {
+    const index = utils.arrayIndexOf(a, item);
     if (index != -1) {
         a.splice(index, 1);
     }
     return index != -1;
 };
 
-utils.typeName = function(val) {
+utils.typeName = function (val) {
     return Object.prototype.toString.call(val).slice(8, -1);
 };
 
@@ -79,36 +79,36 @@ utils.typeName = function(val) {
  * Returns an indication of whether the argument is an array or not
  */
 utils.isArray = Array.isArray ||
-                function(a) {return utils.typeName(a) == 'Array';};
+                function (a) { return utils.typeName(a) == 'Array'; };
 
 /**
  * Returns an indication of whether the argument is a Date or not
  */
-utils.isDate = function(d) {
+utils.isDate = function (d) {
     return (d instanceof Date);
 };
 
 /**
  * Does a deep clone of the object.
  */
-utils.clone = function(obj) {
-    if(!obj || typeof obj == 'function' || utils.isDate(obj) || typeof obj != 'object') {
+utils.clone = function (obj) {
+    if (!obj || typeof obj == 'function' || utils.isDate(obj) || typeof obj != 'object') {
         return obj;
     }
 
-    var retVal, i;
+    let retVal, i;
 
-    if(utils.isArray(obj)){
+    if (utils.isArray(obj)) {
         retVal = [];
-        for(i = 0; i < obj.length; ++i){
+        for (i = 0; i < obj.length; ++i) {
             retVal.push(utils.clone(obj[i]));
         }
         return retVal;
     }
 
     retVal = {};
-    for(i in obj){
-        if(!(i in retVal) || retVal[i] != obj[i]) {
+    for (i in obj) {
+        if (!(i in retVal) || retVal[i] != obj[i]) {
             retVal[i] = utils.clone(obj[i]);
         }
     }
@@ -118,20 +118,20 @@ utils.clone = function(obj) {
 /**
  * Returns a wrapped version of the function
  */
-utils.close = function(context, func, params) {
-    return function() {
-        var args = params || arguments;
+utils.close = function (context, func, params) {
+    return function () {
+        const args = params || arguments;
         return func.apply(context, args);
     };
 };
 
-//------------------------------------------------------------------------------
-function UUIDcreatePart(length) {
-    var uuidpart = "";
-    for (var i=0; i<length; i++) {
-        var uuidchar = parseInt((Math.random() * 256), 10).toString(16);
+// ------------------------------------------------------------------------------
+function UUIDcreatePart (length) {
+    let uuidpart = '';
+    for (let i = 0; i < length; i++) {
+        let uuidchar = parseInt((Math.random() * 256), 10).toString(16);
         if (uuidchar.length == 1) {
-            uuidchar = "0" + uuidchar;
+            uuidchar = '0' + uuidchar;
         }
         uuidpart += uuidchar;
     }
@@ -141,7 +141,7 @@ function UUIDcreatePart(length) {
 /**
  * Create a UUID
  */
-utils.createUUID = function() {
+utils.createUUID = function () {
     return UUIDcreatePart(4) + '-' +
         UUIDcreatePart(2) + '-' +
         UUIDcreatePart(2) + '-' +
@@ -149,17 +149,15 @@ utils.createUUID = function() {
         UUIDcreatePart(6);
 };
 
-
 /**
  * Extends a child object from a parent object using classical inheritance
  * pattern.
  */
-utils.extend = (function() {
+utils.extend = (function () {
     // proxy used to establish prototype chain
-    var F = function() {};
+    const F = function () {};
     // extend Child from Parent
-    return function(Child, Parent) {
-
+    return function (Child, Parent) {
         F.prototype = Parent.prototype;
         Child.prototype = new F();
         Child.__super__ = Parent.prototype;
@@ -170,7 +168,7 @@ utils.extend = (function() {
 /**
  * Alerts a message in any available way: alert or console.log.
  */
-utils.alert = function(msg) {
+utils.alert = function (msg) {
     if (window.alert) {
         window.alert(msg);
     } else if (console && console.log) {
